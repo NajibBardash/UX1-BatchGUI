@@ -2,6 +2,7 @@ const app = {
     data() {
         return {
             hasImage: false,
+
             isCropOpen: false,
             isResizeOpen: false,
             isRotateOpen: false,
@@ -9,7 +10,20 @@ const app = {
             isColorOpen: false,
             isFrameOpen: false,
             isFilterOpen: false,
-            resizeMode: "exact"
+
+            resizeMode: "exact",
+
+            brightnessValue: 50,
+            contrastValue: 50,
+            highlightsValue: 50,
+            shadowsValue: 50,
+
+            hueValue: 50,
+            saturationValue: 50,
+            temperatureValue: 50,
+
+            frameValue: 20,
+            colorValue: 72
         }
     },
     methods: {
@@ -44,10 +58,56 @@ const app = {
         changeFilterArrow() {
             this.isFilterOpen = !this.isFilterOpen;
         },
-        
+
         displayScaleOption() {
             this.hasImage = false;
         }
+    },
+
+    computed: {
+        brightnessSliderStyle() {
+            const val = this.brightnessValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+
+        contrastSliderStyle() {
+            const val = this.contrastValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+
+        highlightsSliderStyle() {
+            const val = this.highlightsValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+
+        shadowsSliderStyle() {
+            const val = this.shadowsValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+
+        frameSliderStyle() {
+            const val = this.frameValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+
+        color() {
+            return `hsl(${this.colorValue}, 100%, 50%)`;
+          }
     }
 }
 Vue.createApp(app).mount("#app");
