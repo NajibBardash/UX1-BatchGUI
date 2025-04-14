@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font-lato.css">
+    <link rel="stylesheet" href="logos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.5.13"
+        integrity="sha384-G++pO/TtP6SeNEBuO/CYuppmlcEhA0Rj9IcY5feVJXhyYraEA8CKVZV38iDXLTyJ" defer
+        crossorigin="anonymous">
+        </script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div id="app" class="lato-regular">
+        <div id="top-bar">
+            <div id="applied" :class="{ disabled: !hasImage, active: hasImage }">
+                <div id="applied-header">
+                    <p>Applied</p>
+                    <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
+                </div>
+            </div>
+            <div id="top-menu">
+                <div id="start" title="Click here to add an image">
+                    <button type="button" @click="show">Add image</button>
+                </div>
+            </div>
+        </div>
+        <div id="menu-row">
+            <aside id="menu" :class="{ disabled: !hasImage, active: hasImage }">
+                <div id="edit-header">
+                    <p>Edit</p>
+                    <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
+                </div>
+                <div id="tools">
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="crop-logo" src="assets/crop-logo.png" alt="Crop">
+                            Crop
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="crop-logo" src="assets/crop-logo.png" alt="Crop">Crop</h4>
+                                <select name="format" class="format">
+                                    <option value="" selected>Common formats</option>
+                                    <option value="square">1:1 (Square)</option>
+                                    <option value="social-post">3:4 (Social post)</option>
+                                    <option value="social-story">9:16 (Social story)</option>
+                                    <option value="high">1:2 (High)</option>
+                                    <option value="wide">2:1 (Wide)</option>
+                                    <option value="4-page">4:1 (4 page social)</option>
+                                    <option value="desktop">4:3 (Desktop)</option>
+                                    <option value="widescreen">16:9 (Widesceen)</option>
+                                </select>
+                                <h4 id="size-header">Exact size</h5>
+                                    <div class="size-spinners">
+                                        <div class="spinner-section">
+                                            <h5>Width</h6>
+                                                <input type="number" min="0" max="100" step="1">
+                                                <button class="tool-execution cancel-button"
+                                                    type="button">Cancel</button>
+                                        </div>
+                                        <div class="spinner-section">
+                                            <h5>Height</h5>
+                                            <input type="number" min="0" max="100" step="1">
+                                            <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="resize-logo" src="assets/resize-logo.png" alt="Resize">
+                            Resize
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="resize-logo" src="assets/resize-logo.png" alt="Resize">Resize</h4>
+                                <select name="format" class="format" v-model="resizeMode">
+                                    <option value="exact" selected>Exact size</option>
+                                    <option value="scale">Scale</option>
+                                </select>
+                                <div v-if="resizeMode === 'exact'">
+                                    <div class="size-spinners resize-spinners">
+                                        <div class="spinner-section">
+                                            <h5>Width</h6>
+                                                <input type="number" min="0" max="100" step="1">
+                                        </div>
+                                        <div class="spinner-section">
+                                            <h5>Height</h5>
+                                            <input type="number" min="0" max="100" step="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else-if="resizeMode === 'scale'">
+                                    <h5>Scale image to</h5>
+                                    <div class="percent-input">
+                                        <input type="number" min="0" max="100" step="1">
+                                        <span class="suffix">%</span>
+                                    </div>
+                                </div>
+                                <div id="resample">
+                                    <label>
+                                        <input type="checkbox" name="resample">
+                                        Resample image<br>
+                                    </label>
+                                </div>
+                                <select name="bicubic-format" class="format">
+                                    <option value="sharper" selected>Bicubic Sharper</option>
+                                    <option value="smoother">Bicubic Smoother</option>
+                                    <option value="bicubic">Bicubic</option>
+                                </select>
+                                <div class="execution-buttons">
+                                    <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                    <button class="tool-execution apply-button" type="submit">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="rotate-logo" src="assets/rotate-logo.png" alt="Rotate">
+                            Rotate
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="rotate-logo" src="assets/rotate-logo.png" alt="Rotate">Rotate</h4>
+                                <div id="rotation">
+                                    <div id="rotate">
+                                        <h5>Rotate</h5>
+                                        <div class="images">
+                                            <button>
+                                                <img class="rotate-logo" src="assets/rotate-logo-reverse.png"
+                                                    alt="rotate-logo-reverse">
+                                            </button>
+                                            <button>
+                                                <img class="rotate-logo" src="assets/rotate-logo.png" alt="rotate-logo">
+                                            </button>
+                                        </div>
+                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                    </div>
+                                    <div id="flip">
+                                        <h5>Flip</h5>
+                                        <div class="images">
+                                            <button>
+                                                <img class="flip-logo" src="assets/flip-logo.png" alt="flip-logo">
+                                            </button>
+                                            <button>
+                                                <img class="flip-logo" src="assets/flip-logo-rotate.png"
+                                                    alt="flip-logo-rotate">
+                                            </button>
+                                        </div>
+                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="exposure-logo" src="assets/exposure-logo.png" alt="Exposure">
+                            Exposure
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="exposure-logo" src="assets/exposure-logo.png" alt="Exposure">Exposure
+                                </h4>
+                                <div id="exposure-section">
+                                    <div class="exposure-part">
+                                        <div class="header-spinner">
+                                            <h5>Brightness</h5>
+                                            <div class="small-percent-input percent-input">
+                                                <input type="number" min="0" max="100" step="1">
+                                                <span class="suffix">%</span>
+                                            </div>
+                                        </div>
+                                        <input class="range-slider" type="range" id="brightness" name="brightness" min="0" max="100"
+                                            value="50" step="1"/>
+                                        <label for="brightness"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="color-logo" src="assets/color-logo.png" alt="color-logo">
+                            Color
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="color-logo" src="assets/color-logo.png" alt="color-logo">Color</h4>
+                                <p>Here you can color the image</p>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="frame-logo" src="assets/frame-logo.png" alt="Frame">
+                            Frame
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="frame-logo" src="assets/frame-logo.png" alt="Frame">Frame</h4>
+                                <p>Here you can frame the image</p>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="tool-panel">
+                        <summary @click="changeArrow">
+                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                            <img class="filter-logo" src="assets/filter-logo.png" alt="Filter">
+                            Filter
+                        </summary>
+                        <div class="tool-container">
+                            <div class="tool">
+                                <h4><img class="filter-logo" src="assets/filter-logo.png" alt="Filter">Filter</h4>
+                                <p>Here you can filter the image</p>
+                            </div>
+                        </div>
+                    </details>
+
+                </div>
+            </aside>
+            <div id="workbench-start" v-if="!hasImage" class="workbench">
+                <div>
+                    <button id="add-image" title="Click here to add an image" @click="show">
+                        <img src="assets/add-image-icon.png" alt="Add img logo">
+                        <p>Add image</p>
+                    </button>
+                </div>
+            </div>
+            <div id="in-progress" v-if="hasImage" class="workbench">
+                <div>
+                    <button id="add-image" title="Click here to add an image" @click="show">
+                        <img src="assets/add-image-icon.png" alt="Add img logo">
+                        <p>Add image</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+.info-logo {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 18px;
+    right: 5px;
+}
+
+.arrow-logo {
+    height: 10px;
+    width: 17px;
+    position: relative;
+    top: 1px;
+    left: 200px;
+}
+
+.crop-logo {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 4px;
+    right: 5px;
+    padding-right: 0;
+}
+
+.resize-logo {
+    height: 19px;
+    width: 18px;
+    padding-right: .25rem;
+    position: relative;
+    top: 4px;
+    right: 3px;
+}
+
+.rotate-logo {
+    height: 21px;
+    width: 20px;
+    padding-right: .30rem;
+    position: relative;
+    top: 3px;
+    right: 3px;
+}
+
+.flip-logo {
+    height: 21px;
+    width: 20px;
+    padding-right: .30rem;
+    position: relative;
+    top: 3px;
+    right: 3px;
+}
+
+.exposure-logo {
+    height: 21px;
+    width: 21px;
+    padding-right: .25rem;
+    position: relative;
+    top: 4px;
+    right: 3px;
+}
+
+.color-logo {
+    height: 18px;
+    width: 18px;
+    padding: 0 .5rem 0 0;
+    position: relative;
+    top: 2px;
+}
+
+.frame-logo {
+    height: 20px;
+    width: 20px;
+    padding: 0 .4rem 0 0;
+    position: relative;
+    top: 4px;
+}
+
+.filter-logo {
+    height: 20px;
+    width: 20px;
+    padding: 0 .4rem 0 0;
+    position: relative;
+    top: 4px;
+}
