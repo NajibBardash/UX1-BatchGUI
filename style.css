@@ -394,11 +394,12 @@ h4 {
 #exposure-section {
 
     .exposure-part {
+        margin-bottom: 1rem;
 
         .header-spinner {
             display: flex;
-            justify-content: flex-start;
-            gap: 6rem;
+            justify-content: space-between;
+            width: 95%;
         }
 
         .range-slider {
