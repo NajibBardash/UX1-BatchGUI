@@ -43,9 +43,9 @@
                 </div>
                 <div id="tools">
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeCropArrow">
+                            <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isCropOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="crop-logo" src="assets/crop-logo.png" alt="Crop">
                             Crop
                         </summary>
@@ -81,9 +81,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeResizeArrow">
+                            <img v-if="!isResizeOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isResizeOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="resize-logo" src="assets/resize-logo.png" alt="Resize">
                             Resize
                         </summary>
@@ -132,9 +132,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeRotateArrow">
+                            <img v-if="!isRotateOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isRotateOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="rotate-logo" src="assets/rotate-logo.png" alt="Rotate">
                             Rotate
                         </summary>
@@ -173,9 +173,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeExposureArrow">
+                            <img v-if="!isExposureOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isExposureOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="exposure-logo" src="assets/exposure-logo.png" alt="Exposure">
                             Exposure
                         </summary>
@@ -201,9 +201,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeColorArrow">
+                            <img v-if="!isColorOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isColorOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="color-logo" src="assets/color-logo.png" alt="color-logo">
                             Color
                         </summary>
@@ -215,9 +215,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeFrameArrow">
+                            <img v-if="!isFrameOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isFrameOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="frame-logo" src="assets/frame-logo.png" alt="Frame">
                             Frame
                         </summary>
@@ -229,9 +229,9 @@
                         </div>
                     </details>
                     <details class="tool-panel">
-                        <summary @click="changeArrow">
-                            <img v-if="!isOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
-                            <img v-else-if="isOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
+                        <summary @click="changeFilterArrow">
+                            <img v-if="!isFilterOpen" class="arrow-logo" src="assets/down-arrow-logo.png" alt="down-arrow-logo">
+                            <img v-else-if="isFilterOpen" class="arrow-logo" src="assets/up-arrow-logo.png" alt="up-arrow-logo">
                             <img class="filter-logo" src="assets/filter-logo.png" alt="Filter">
                             Filter
                         </summary>
