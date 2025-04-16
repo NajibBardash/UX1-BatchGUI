@@ -30,8 +30,32 @@
                 </div>
             </div>
             <div id="top-menu">
-                <div id="start" title="Click here to add an image">
-                    <button type="button" @click="show">Add image</button>
+                <div id="start">
+
+                    <div v-if="!hasImage" title="Click here to add an image">
+
+                        <button type="button" @click="show">Add image</button>
+
+                    </div>
+
+
+
+                    <div v-else class="button-group">
+
+                        <button type="button" @click="clear">Clear</button>
+
+                        <button type="button" @click="show">Add images</button>
+
+                        <button type="button" @click="show">All images</button>
+
+                        <button type="button" @click="selectOne">One image</button>
+
+                        <button type="button" @click="exportAs">Export as</button>
+
+                        <button type="button" @click="save">Save</button>
+
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -279,7 +303,7 @@
                                             </div>
                                         </div>
                                         <input class="range-slider custom-hue-slider" type="range" id="hue" name="hue"
-                                            min="0" max="100" value="50" step="1" v-model="hueValue"/>
+                                            min="0" max="100" value="50" step="1" v-model="hueValue" />
                                         <label for="hue"></label>
                                     </div>
                                     <div class="color-part">
@@ -293,7 +317,7 @@
                                         </div>
                                         <input class="range-slider custom-saturation-slider" type="range"
                                             id="saturation" name="saturation" min="0" max="100" value="50" step="1"
-                                            v-model="saturationValue"/>
+                                            v-model="saturationValue" />
                                         <label for="saturation"></label>
                                     </div>
                                     <div class="color-part">
@@ -305,8 +329,9 @@
                                                 <span class="suffix">%</span>
                                             </div>
                                         </div>
-                                        <input class="range-slider custom-temperature-slider" type="range" id="temperature" name="temperature"
-                                            min="0" max="100" value="50" step="1" v-model="temperatureValue"/>
+                                        <input class="range-slider custom-temperature-slider" type="range"
+                                            id="temperature" name="temperature" min="0" max="100" value="50" step="1"
+                                            v-model="temperatureValue" />
                                         <label for="temperature"></label>
                                     </div>
                                     <div class="execution-buttons">
@@ -340,7 +365,8 @@
                                             </div>
                                         </div>
                                         <input class="range-slider custom-slider" type="range" id="frame" name="frame"
-                                            min="0" max="100" value="20" step="1" v-model="frameValue" :style="frameSliderStyle"/>
+                                            min="0" max="100" value="20" step="1" v-model="frameValue"
+                                            :style="frameSliderStyle" />
                                         <label for="frame"></label>
                                     </div>
                                     <div class="frame-part">
@@ -348,8 +374,8 @@
                                             <h5>Color</h5>
                                             <div class="color-swatch" :style="{ backgroundColor: color }"></div>
                                         </div>
-                                        <input class="range-slider custom-color-slider" type="range" id="color" name="color"
-                                            min="0" max="360" step="1" v-model.number="colorValue"/>
+                                        <input class="range-slider custom-color-slider" type="range" id="color"
+                                            name="color" min="0" max="360" step="1" v-model.number="colorValue" />
                                         <label for="color"></label>
                                     </div>
                                     <div class="execution-buttons">
@@ -403,14 +429,35 @@
                 </div>
             </div>
             <div id="in-progress" v-if="hasImage" class="workbench">
-                <div>
-                    <button id="add-image" title="Click here to add an image" @click="show">
-                        <img src="assets/add-image-icon.png" alt="Add img logo">
-                        <p>Add image</p>
-                    </button>
+                <div class="container">
+
+                    <template v-if="activeBox === null">
+                        <div v-for="(box, index) in 5" :key="index" class="box" @click="activateBox(index)"></div>
+                    </template>
+
+                    <template v-else>
+                        <div class="box-wrapper">
+                            <div class="box large-box" @click="deactivateBox">
+                                Photo
+                            </div>
+                            <div class="box-controls">
+                                <span class="minus">−</span>
+                                <span class="percent">100%</span>
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div v-if="showExportModal" class="modal-overlay">
+                <div class="modal-window">
+                    <h2>Export </h2>
+                    <p></p>
+                    <button @click="closeExportModal">Close</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

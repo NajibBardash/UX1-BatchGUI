@@ -2,6 +2,7 @@ const app = {
     data() {
         return {
             hasImage: false,
+            showExportModal: false,
 
             isCropOpen: false,
             isResizeOpen: false,
@@ -10,6 +11,8 @@ const app = {
             isColorOpen: false,
             isFrameOpen: false,
             isFilterOpen: false,
+
+            activeBox: null,
 
             resizeMode: "exact",
 
@@ -61,7 +64,22 @@ const app = {
 
         displayScaleOption() {
             this.hasImage = false;
-        }
+        },
+
+        exportAs() {
+            this.showExportModal = true;
+        },
+
+        closeExportModal() {
+            this.showExportModal = false;
+        },
+
+        activateBox(index) {
+            this.activeBox = index;
+          },
+          deactivateBox() {
+            this.activeBox = null;
+          }
     },
 
     computed: {
@@ -107,7 +125,7 @@ const app = {
 
         color() {
             return `hsl(${this.colorValue}, 100%, 50%)`;
-          }
+        }
     }
 }
 Vue.createApp(app).mount("#app");
