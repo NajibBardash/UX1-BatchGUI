@@ -26,6 +26,7 @@ const app = {
             colorValue: 72
         }
     },
+
     methods: {
         show() {
             this.hasImage = true;
@@ -61,6 +62,18 @@ const app = {
 
         displayScaleOption() {
             this.hasImage = false;
+        },
+
+        triggerFileInput() {
+            this.$refs.fileInput.click();
+        },
+
+        onImageSelected(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('Image selected:', file);
+                this.hasImage = true;
+            }
         }
     },
 
@@ -107,7 +120,8 @@ const app = {
 
         color() {
             return `hsl(${this.colorValue}, 100%, 50%)`;
-          }
+        }
     }
 }
+
 Vue.createApp(app).mount("#app");

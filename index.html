@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Batch-GUI</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="font-lato.css">
     <link rel="stylesheet" href="logos.css">
@@ -17,7 +17,7 @@
         integrity="sha384-G++pO/TtP6SeNEBuO/CYuppmlcEhA0Rj9IcY5feVJXhyYraEA8CKVZV38iDXLTyJ" defer
         crossorigin="anonymous">
         </script>
-    <script src="script.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 
 <body>
@@ -279,7 +279,7 @@
                                             </div>
                                         </div>
                                         <input class="range-slider custom-hue-slider" type="range" id="hue" name="hue"
-                                            min="0" max="100" value="50" step="1" v-model="hueValue"/>
+                                            min="0" max="100" value="50" step="1" v-model="hueValue" />
                                         <label for="hue"></label>
                                     </div>
                                     <div class="color-part">
@@ -293,7 +293,7 @@
                                         </div>
                                         <input class="range-slider custom-saturation-slider" type="range"
                                             id="saturation" name="saturation" min="0" max="100" value="50" step="1"
-                                            v-model="saturationValue"/>
+                                            v-model="saturationValue" />
                                         <label for="saturation"></label>
                                     </div>
                                     <div class="color-part">
@@ -305,8 +305,9 @@
                                                 <span class="suffix">%</span>
                                             </div>
                                         </div>
-                                        <input class="range-slider custom-temperature-slider" type="range" id="temperature" name="temperature"
-                                            min="0" max="100" value="50" step="1" v-model="temperatureValue"/>
+                                        <input class="range-slider custom-temperature-slider" type="range"
+                                            id="temperature" name="temperature" min="0" max="100" value="50" step="1"
+                                            v-model="temperatureValue" />
                                         <label for="temperature"></label>
                                     </div>
                                     <div class="execution-buttons">
@@ -340,7 +341,8 @@
                                             </div>
                                         </div>
                                         <input class="range-slider custom-slider" type="range" id="frame" name="frame"
-                                            min="0" max="100" value="20" step="1" v-model="frameValue" :style="frameSliderStyle"/>
+                                            min="0" max="100" value="20" step="1" v-model="frameValue"
+                                            :style="frameSliderStyle" />
                                         <label for="frame"></label>
                                     </div>
                                     <div class="frame-part">
@@ -348,8 +350,8 @@
                                             <h5>Color</h5>
                                             <div class="color-swatch" :style="{ backgroundColor: color }"></div>
                                         </div>
-                                        <input class="range-slider custom-color-slider" type="range" id="color" name="color"
-                                            min="0" max="360" step="1" v-model.number="colorValue"/>
+                                        <input class="range-slider custom-color-slider" type="range" id="color"
+                                            name="color" min="0" max="360" step="1" v-model.number="colorValue" />
                                         <label for="color"></label>
                                     </div>
                                     <div class="execution-buttons">
@@ -396,10 +398,12 @@
             </aside>
             <div id="workbench-start" v-if="!hasImage" class="workbench">
                 <div>
-                    <button id="add-image" title="Click here to add an image" @click="show">
+                    <button id="add-image" title="Click here to add an image" @click="triggerFileInput">
                         <img src="assets/add-image-icon.png" alt="Add img logo">
                         <p>Add image</p>
                     </button>
+                    <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
+                        style="display: none;" />
                 </div>
             </div>
             <div id="in-progress" v-if="hasImage" class="workbench">
