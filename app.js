@@ -1,4 +1,4 @@
-const app = {
+const app = Vue.createApp({
     data() {
         return {
             hasImage: false,
@@ -15,6 +15,7 @@ const app = {
             activeBox: null,
 
             resizeMode: "exact",
+            imageFormat: "png",
 
             brightnessValue: 50,
             contrastValue: 50,
@@ -26,13 +27,16 @@ const app = {
             temperatureValue: 50,
 
             frameValue: 20,
-            colorValue: 72
+            colorValue: 72,
+
+            qualityValue: 50
         }
     },
 
     methods: {
-        show() {
-            this.hasImage = true;
+
+        clear() {
+            this.hasImage = !this.hasImage;
         },
 
         changeCropArrow() {
@@ -89,7 +93,6 @@ const app = {
         onImageSelected(event) {
             const file = event.target.files[0];
             if (file) {
-                console.log('Image selected:', file);
                 this.hasImage = true;
             }
         }
@@ -138,8 +141,16 @@ const app = {
 
         color() {
             return `hsl(${this.colorValue}, 100%, 50%)`;
-        }
-    }
-}
+        },
 
-Vue.createApp(app).mount("#app");
+        qualitySliderStyle() {
+            const val = this.qualityValue;
+            const percent = val;
+            return {
+                background: `linear-gradient(to right, white 0%, white ${percent}%, #565656 ${percent}%, #565656 100%)`
+            };
+        },
+    }
+});
+
+app.mount("#app");

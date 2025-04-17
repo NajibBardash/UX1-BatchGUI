@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batch-GUI</title>
+
+
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="font-lato.css">
     <link rel="stylesheet" href="logos.css">
@@ -22,52 +25,22 @@
 
 <body>
     <div id="app" class="lato-regular">
-        <div id="top-bar">
-            <div id="applied" :class="{ disabled: !hasImage, active: hasImage }">
-                <div id="applied-header">
+        <div id="left-bar">
+            <div id="applied-menu" :class="{ disabled: !hasImage, active: hasImage }">
+                <div id="applied-header" title="Applied changes">
                     <p>Applied</p>
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
             </div>
-            <div id="top-menu">
-                <div id="start">
 
-                    <div v-if="!hasImage" title="Click here to add an image">
-
-                        <button type="button" @click="show">Add image</button>
-
-                    </div>
-
-
-
-                    <div v-else class="button-group">
-
-                        <button type="button" @click="clear">Clear</button>
-
-                        <button type="button" @click="show">Add images</button>
-
-                        <button type="button" @click="show">All images</button>
-
-                        <button type="button" @click="selectOne">One image</button>
-
-                        <button type="button" @click="exportAs">Export as</button>
-
-                        <button type="button" @click="save">Save</button>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div id="menu-row">
             <aside id="menu" :class="{ disabled: !hasImage, active: hasImage }">
-                <div id="edit-header">
+                <div id="edit-header" title="Edit you image(s) by picking a tool">
                     <p>Edit</p>
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
                 <div id="tools">
                     <details class="tool-panel">
-                        <summary @click="changeCropArrow">
+                        <summary @click="changeCropArrow" v-tooltip="'This is a tooltip\nwith a line break'">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isCropOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -94,14 +67,15 @@
                                         <div class="spinner-section">
                                             <h5>Width</h6>
                                                 <input type="number" min="0" max="100" step="1">
-                                                <button class="tool-execution cancel-button"
-                                                    type="button">Cancel</button>
                                         </div>
                                         <div class="spinner-section">
                                             <h5>Height</h5>
                                             <input type="number" min="0" max="100" step="1">
-                                            <button class="tool-execution apply-button" type="submit">Apply</button>
                                         </div>
+                                    </div>
+                                    <div class="execution-buttons">
+                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution apply-button" type="submit">Apply</button>
                                     </div>
                             </div>
                         </div>
@@ -134,14 +108,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-else-if="resizeMode === 'scale'">
+                                <div v-else="resizeMode === 'scale'">
                                     <h5>Scale image to</h5>
-                                    <div class="percent-input">
+                                    <div id="scale-input">
                                         <input type="number" min="0" max="100" step="1">
                                         <span class="suffix">%</span>
                                     </div>
                                 </div>
-                                <div id="resample">
+                                <div class="checker">
                                     <label>
                                         <input type="checkbox" name="resample">
                                         Resample image<br>
@@ -417,49 +391,152 @@
                             </div>
                         </div>
                     </details>
-
                 </div>
             </aside>
-            <div id="workbench-start" v-if="!hasImage" class="workbench">
-                <div>
-                    <button id="add-image" title="Click here to add an image" @click="triggerFileInput">
-                        <img src="assets/add-image-icon.png" alt="Add img logo">
-                        <p>Add image</p>
-                    </button>
-                    <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
-                        style="display: none;" />
-                </div>
-            </div>
-            <div id="in-progress" v-if="hasImage" class="workbench">
-                <div class="container">
 
-                    <template v-if="activeBox === null">
-                        <div v-for="(box, index) in 5" :key="index" class="box" @click="activateBox(index)"></div>
-                    </template>
+        </div>
 
-                    <template v-else>
-                        <div class="box-wrapper">
-                            <div class="box large-box" @click="deactivateBox">
-                                Photo
-                            </div>
-                            <div class="box-controls">
-                                <span class="minus">−</span>
-                                <span class="percent">100%</span>
-                                <span class="plus">+</span>
-                            </div>
-                        </div>
-                    </template>
+
+        <div id="main-bar">
+            <div id="top-bar">
+                <div v-if="!hasImage" id="start">
+                    <div title="Click here to add images">
+                        <button type="button" class="top-bar-button" @click="triggerFileInput">
+                            Add images
+                            <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
+                                style="display: none;" />
+                        </button>
+                    </div>
                 </div>
+
+                <div v-else id="in-progress">
+                    <div id="first-button-group" class="button-group">
+                        <button type="button" class="top-bar-button" @click="clear">Clear</button>
+                    </div>
+                    <div id="second-button-group" class="button-group">
+                        <button type="button" class="top-bar-button" @click="triggerFileInput">Add images</button>
+                        <button type="button" class="top-bar-button" @click="show">All images</button>
+                        <button type="button" class="top-bar-button" @click="selectOne">One image</button>
+                    </div>
+                    <div id="third-button-group" class="button-group">
+                        <button type="button" class="top-bar-button" @click="exportAs">Export as...</button>
+                        <button type="button" class="top-bar-button" @click="save">Save</button>
+                    </div>
+                </div>
+
             </div>
-            <div v-if="showExportModal" class="modal-overlay">
-                <div class="modal-window">
-                    <h2>Export </h2>
-                    <p></p>
-                    <button @click="closeExportModal">Close</button>
+
+            <div id="workbench">
+                <div id="workbench-start" v-if="!hasImage">
+                    <div class="add-image-container">
+                        <button id="add-image" title="Click here to add images" @click="triggerFileInput">
+                            <img src="assets/add-image-icon.png" alt="Add img logo">
+                            <p>Add images</p>
+                        </button>
+                        <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
+                            style="display: none;" />
+                    </div>
+                </div>
+                <div id="workbench-progress" v-if="hasImage">
+                    <div class="container">
+
+                        <template v-if="activeBox === null">
+                            <div v-for="(imageContainer, index) in 8" :key="index" class="image-container"
+                                @click="activateBox(index)">
+                                <div class="image">
+                                    <img src="assets/amazonas.jpeg" alt="Amazonas">
+                                </div>
+                            </div>
+
+                            <div class="add-image-container">
+                                <button id="add-image" title="Click here to add an image" @click="triggerFileInput">
+                                    <img src="assets/add-image-icon.png" alt="Add img logo">
+                                    <p>Add image</p>
+                                </button>
+                                <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
+                                    style="display: none;" />
+                            </div>
+                        </template>
+
+                        <template v-else>
+                            <div class="box-wrapper">
+                                <div class="large-box" @click="deactivateBox">
+                                    <img src="assets/amazonas.jpeg" alt="Amazonas">
+                                </div>
+                                <div class="box-controls">
+                                    <span class="minus">−</span>
+                                    <span class="percent">100%</span>
+                                    <span class="plus">+</span>
+                                </div>
+                            </div>
+                        </template>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div v-if="showExportModal" class="modal-overlay">
+            <div class="modal-window">
+                <div class="modal-header">
+                    <button @click="closeExportModal">Close</button>
+                    <h2>Export as...</h2>
+                </div>
+                <div class="modal-workbench">
+                    <div class="view-area">
+
+                    </div>
+                    <div class="modal-sidebar">
+                        <div class="choose-format">
+                            <h5>Format</h5>
+                            <select name="format" class="format" v-model="imageFormat">
+                                <option value="png" selected>PNG</option>
+                                <option value="jpg">JPG</option>
+                                <option value="pdf">PDF</option>
+                            </select>
+
+                            <div v-if="imageFormat === 'png'" class="options">
+                                <div class="checker">
+                                    <label>
+                                        <input type="checkbox" name="transparency">
+                                        Transparency<br>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div v-else-if="imageFormat === 'jpg'" class="options">
+                                <h5>Quality</h5>
+                                <input class="range-slider custom-slider" type="range" id="quality" name="quality"
+                                    min="0" max="100" value="50" step="1" v-model="qualityValue"
+                                    :style="qualitySliderStyle" />
+                                <label for="quality"></label>
+                                <div id="quality-headers">
+                                    <h5>Low</h5>
+                                    <h5>High</h5>
+                                </div>
+                            </div>
+
+                            <div v-else class="options">
+                                <select name="format" class="format">
+                                    <option value="high" selected>High quality replacement</option>
+                                    <option value="min">Minimum file size</option>
+                                    <option value="print">Print quality</option>
+                                </select>
+                            </div>
+
+                            <div class="execution-buttons">
+                                <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                <button class="tool-execution apply-button" type="submit">Export</button>
+                            </div>
+                        </div>
+                        <div class="mark-images">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </body>
 
