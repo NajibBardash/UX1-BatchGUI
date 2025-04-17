@@ -29,6 +29,7 @@ const app = {
             colorValue: 72
         }
     },
+
     methods: {
         show() {
             this.hasImage = true;
@@ -76,10 +77,22 @@ const app = {
 
         activateBox(index) {
             this.activeBox = index;
-          },
-          deactivateBox() {
+        },
+        deactivateBox() {
             this.activeBox = null;
-          }
+        },
+
+        triggerFileInput() {
+            this.$refs.fileInput.click();
+        },
+
+        onImageSelected(event) {
+            const file = event.target.files[0];
+            if (file) {
+                console.log('Image selected:', file);
+                this.hasImage = true;
+            }
+        }
     },
 
     computed: {
@@ -128,4 +141,5 @@ const app = {
         }
     }
 }
+
 Vue.createApp(app).mount("#app");
