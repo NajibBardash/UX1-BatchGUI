@@ -84,6 +84,10 @@ const app = Vue.createApp({
             this.isFilterOpen = !this.isFilterOpen;
         },
 
+        closeSummary(id) {
+            document.getElementById(id).click();
+        },
+
         displayScaleOption() {
             this.hasImage = false;
         },
