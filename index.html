@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batch-GUI</title>
 
-
-
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="font-lato.css">
     <link rel="stylesheet" href="logos.css">
@@ -32,11 +30,11 @@
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
 
-                <ul v-if="appliedTools.length > 0" id="tools">
+                <ul v-if="appliedTools.length > 0" class="tools">
                     <details class="tool-panel" v-for="tool in appliedTools" :key="tool" open>
-                        <summary
-                            style="list-style: none; cursor: default; display: flex; align-items: center; justify-content: space-between;">
-                            <span style="display: flex; align-items: center;">
+                        <summary>
+                            <span>
+                                <img src="assets/down-arrow-logo.png" alt="down-arrow" class="arrow-logo">
                                 <img :src="`assets/${tool.toLowerCase()}-logo.png`" :alt="`${tool}-logo`"
                                     :class="`${tool.toLowerCase()}-logo`" style="margin-right: 0.5rem;">
                                 {{ tool }}
@@ -45,7 +43,6 @@
                         </summary>
                     </details>
                 </ul>
-                <p v-else style="padding-left: 0.5rem;">No applied tools</p>
             </div>
 
             <aside id="menu" :class="{ disabled: !hasImage, active: hasImage }">
@@ -53,7 +50,7 @@
                     <p>Edit</p>
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
-                <div id="tools">
+                <div class="tools">
                     <details class="tool-panel" v-if="!appliedTools.includes('Crop')">
                         <summary @click="changeCropArrow" v-tooltip="'This is a tooltip\nwith a line break'">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
@@ -501,8 +498,9 @@
         <div v-if="showExportModal" class="modal-overlay">
             <div class="modal-window">
                 <div class="modal-header">
-                    <button @click="closeExportModal">Close</button>
-                    <h2>Export as...</h2>
+                    <button @click="closeExportModal"><img src="assets/close-logo.png" alt="Close"
+                            class="close-logo"></button>
+                    <h3>Export as...</h3>
                 </div>
                 <div class="modal-workbench">
                     <div class="view-area">
@@ -538,8 +536,8 @@
                                 </div>
                             </div>
 
-                            <div v-else class="options">
-                                <select name="format" class="format">
+                            <div v-else class="options" id="pdf-quality">
+                                <select name="format" class="format pdf-quality">
                                     <option value="high" selected>High quality replacement</option>
                                     <option value="min">Minimum file size</option>
                                     <option value="print">Print quality</option>
@@ -547,12 +545,28 @@
                             </div>
 
                             <div class="execution-buttons">
-                                <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                <button class="tool-execution apply-button" type="submit">Export</button>
+                                <button class="tool-execution cancel-button" type="button"
+                                    @click="closeExportModal">Cancel</button>
+                                <button class="tool-execution apply-button" type="button"
+                                    @click="closeExportModal">Export</button>
                             </div>
                         </div>
                         <div class="mark-images">
-
+                            <div class="checker">
+                                <label>
+                                    <input type="checkbox" name="mark-all" v-model="markAll" @change="toggleAll">
+                                    Mark all<br>
+                                </label>
+                            </div>
+                            <div class="check-image" v-for="(checked, index) in images" :key="index">
+                                <div class="checker">
+                                    <label>
+                                        <input type="checkbox" v-model="images[index]" @change="checkIfAllSelected"
+                                            aria-label="Select image">
+                                    </label>
+                                </div>
+                                <img src="assets/amazonas.jpeg" alt="Amazonas">
+                            </div>
                         </div>
                     </div>
                 </div>

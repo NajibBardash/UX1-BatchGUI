@@ -30,6 +30,8 @@ const app = Vue.createApp({
             colorValue: 72,
 
             qualityValue: 50,
+            markAll: false,
+            images: [false, false, false],
 
             appliedTools: []
         }
@@ -39,7 +41,13 @@ const app = Vue.createApp({
 
         clear() {
             this.hasImage = !this.hasImage;
-            
+        },
+
+        toggleAll() {
+            this.images = this.images.map(() => this.markAll);
+        },
+        checkIfAllSelected() {
+            this.markAll = this.images.every(val => val);
         },
 
         applyTool(toolName) {
@@ -109,9 +117,9 @@ const app = Vue.createApp({
         removeTool(toolName) {
             const index = this.appliedTools.indexOf(toolName);
             if (index !== -1) {
-              this.appliedTools.splice(index, 1);
+                this.appliedTools.splice(index, 1);
             }
-          }
+        }
     },
 
     computed: {
