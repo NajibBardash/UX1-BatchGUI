@@ -31,6 +31,21 @@
                     <p>Applied</p>
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
+
+                <ul v-if="appliedTools.length > 0" id="tools">
+                    <details class="tool-panel" v-for="tool in appliedTools" :key="tool" open>
+                        <summary
+                            style="list-style: none; cursor: default; display: flex; align-items: center; justify-content: space-between;">
+                            <span style="display: flex; align-items: center;">
+                                <img :src="`assets/${tool.toLowerCase()}-logo.png`" :alt="`${tool}-logo`"
+                                    :class="`${tool.toLowerCase()}-logo`" style="margin-right: 0.5rem;">
+                                {{ tool }}
+                            </span>
+                            <button class="remove-applied-button" @click.stop="removeTool(tool)">✖</button>
+                        </summary>
+                    </details>
+                </ul>
+                <p v-else style="padding-left: 0.5rem;">No applied tools</p>
             </div>
 
             <aside id="menu" :class="{ disabled: !hasImage, active: hasImage }">
@@ -39,7 +54,7 @@
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
                 <div id="tools">
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Crop')">
                         <summary @click="changeCropArrow" v-tooltip="'This is a tooltip\nwith a line break'">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -75,12 +90,13 @@
                                     </div>
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Crop')">Apply</button>
                                     </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Resize')">
                         <summary @click="changeResizeArrow">
                             <img v-if="!isResizeOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -128,12 +144,13 @@
                                 </select>
                                 <div class="execution-buttons">
                                     <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                    <button class="tool-execution apply-button" type="submit">Apply</button>
+                                    <button class="tool-execution apply-button" type="button"
+                                        @click="applyTool('Resize')">Apply</button>
                                 </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Rotate')">
                         <summary @click="changeRotateArrow">
                             <img v-if="!isRotateOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -170,13 +187,14 @@
                                                     alt="flip-logo-rotate">
                                             </button>
                                         </div>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Rotate')">Apply</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Exposure')">
                         <summary @click="changeExposureArrow">
                             <img v-if="!isExposureOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -248,13 +266,14 @@
                                     </div>
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Exposure')">Apply</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Color')">
                         <summary @click="changeColorArrow">
                             <img v-if="!isColorOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -310,13 +329,14 @@
                                     </div>
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Color')">Apply</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Frame')">
                         <summary @click="changeFrameArrow">
                             <img v-if="!isFrameOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -354,13 +374,14 @@
                                     </div>
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Frame')">Apply</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Filter')">
                         <summary @click="changeFilterArrow">
                             <img v-if="!isFilterOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -385,7 +406,8 @@
                                     </div>
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
-                                        <button class="tool-execution apply-button" type="submit">Apply</button>
+                                        <button class="tool-execution apply-button" type="button"
+                                            @click="applyTool('Filter')">Apply</button>
                                     </div>
                                 </div>
                             </div>

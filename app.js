@@ -29,7 +29,9 @@ const app = Vue.createApp({
             frameValue: 20,
             colorValue: 72,
 
-            qualityValue: 50
+            qualityValue: 50,
+
+            appliedTools: []
         }
     },
 
@@ -37,6 +39,13 @@ const app = Vue.createApp({
 
         clear() {
             this.hasImage = !this.hasImage;
+            
+        },
+
+        applyTool(toolName) {
+            if (!this.appliedTools.includes(toolName)) {
+                this.appliedTools.push(toolName);
+            }
         },
 
         changeCropArrow() {
@@ -95,7 +104,14 @@ const app = Vue.createApp({
             if (file) {
                 this.hasImage = true;
             }
-        }
+        },
+
+        removeTool(toolName) {
+            const index = this.appliedTools.indexOf(toolName);
+            if (index !== -1) {
+              this.appliedTools.splice(index, 1);
+            }
+          }
     },
 
     computed: {
