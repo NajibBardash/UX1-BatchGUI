@@ -6,6 +6,14 @@
     right: 5px;
 }
 
+.close-logo {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 1px;
+    left: 5px;
+}
+
 .arrow-logo {
     height: 10px;
     width: 17px;
