@@ -33,7 +33,11 @@ const app = Vue.createApp({
             markAll: false,
             images: [false, false, false],
 
-            appliedTools: []
+            appliedTools: [],
+
+            preview: true,
+            imageSize: Number(100),
+            exportSize: Number(100)
         }
     },
 
@@ -54,6 +58,48 @@ const app = Vue.createApp({
             if (!this.appliedTools.includes(toolName)) {
                 this.appliedTools.push(toolName);
             }
+        },
+
+        setPreviewTrue() {
+            this.preview = true;
+        },
+
+        setPreviewFalse() {
+            this.preview = false;
+        },
+
+        decreaseImageSize() {
+            if (this.imageSize > 1) {
+                this.imageSize--;
+
+            }
+        },
+
+        increaseImageSize() {
+            if (this.imageSize < 100) {
+                this.imageSize++;
+            }
+        },
+
+        resetImageSize() {
+            this.imageSize = Number(100);
+        },
+
+        decreaseExportSize() {
+            if (this.exportSize > 1) {
+                this.exportSize--;
+
+            }
+        },
+
+        increaseExportSize() {
+            if (this.exportSize < 100) {
+                this.exportSize++;
+            }
+        },
+
+        resetExportSize() {
+            this.exportSize = Number(100);
         },
 
         changeCropArrow() {
