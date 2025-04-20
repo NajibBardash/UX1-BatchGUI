@@ -52,7 +52,7 @@
                 </div>
                 <div class="tools">
                     <details class="tool-panel" v-if="!appliedTools.includes('Crop')">
-                        <summary @click="changeCropArrow">
+                        <summary @click="changeCropArrow" id="crop">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isCropOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                     <div class="execution-buttons">
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('crop')">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
                                             @click="applyTool('Crop'); changeCropArrow()">Apply</button>
                                     </div>
@@ -94,7 +94,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Resize')">
-                        <summary @click="changeResizeArrow">
+                        <summary @click="changeResizeArrow" id="resize">
                             <img v-if="!isResizeOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isResizeOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -140,7 +140,7 @@
                                     <option value="bicubic">Bicubic</option>
                                 </select>
                                 <div class="execution-buttons">
-                                    <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                    <button class="tool-execution cancel-button" type="button" @click="closeSummary('resize')">Cancel</button>
                                     <button class="tool-execution apply-button" type="button"
                                         @click="applyTool('Resize'); changeResizeArrow()">Apply</button>
                                 </div>
@@ -148,7 +148,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Rotate')">
-                        <summary @click="changeRotateArrow">
+                        <summary @click="changeRotateArrow" id="rotate">
                             <img v-if="!isRotateOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isRotateOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -171,7 +171,7 @@
                                                 <img class="rotate-logo" src="assets/rotate-logo.png" alt="rotate-logo">
                                             </button>
                                         </div>
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('rotate')">Cancel</button>
                                     </div>
                                     <div id="flip">
                                         <h5>Flip</h5>
@@ -192,7 +192,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Exposure')">
-                        <summary @click="changeExposureArrow">
+                        <summary @click="changeExposureArrow" id="exposure">
                             <img v-if="!isExposureOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isExposureOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -262,7 +262,7 @@
                                         <label for="shadows"></label>
                                     </div>
                                     <div class="execution-buttons">
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('exposure')">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
                                             @click="applyTool('Exposure'); changeExposureArrow()">Apply</button>
                                     </div>
@@ -271,7 +271,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Color')">
-                        <summary @click="changeColorArrow">
+                        <summary @click="changeColorArrow" id="color">
                             <img v-if="!isColorOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isColorOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -325,7 +325,7 @@
                                         <label for="temperature"></label>
                                     </div>
                                     <div class="execution-buttons">
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('color')">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
                                             @click="applyTool('Color'); changeColorArrow()">Apply</button>
                                     </div>
@@ -334,7 +334,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Frame')">
-                        <summary @click="changeFrameArrow">
+                        <summary @click="changeFrameArrow" id="frame">
                             <img v-if="!isFrameOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isFrameOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -370,7 +370,7 @@
                                         <label for="color"></label>
                                     </div>
                                     <div class="execution-buttons">
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('frame')">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
                                             @click="applyTool('Frame'); changeFrameArrow()">Apply</button>
                                     </div>
@@ -379,7 +379,7 @@
                         </div>
                     </details>
                     <details class="tool-panel" v-if="!appliedTools.includes('Filter')">
-                        <summary @click="changeFilterArrow">
+                        <summary @click="changeFilterArrow" id="filter">
                             <img v-if="!isFilterOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isFilterOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -402,7 +402,7 @@
                                         <div id="sepia" class="filter" tabindex="0"></div>
                                     </div>
                                     <div class="execution-buttons">
-                                        <button class="tool-execution cancel-button" type="button">Cancel</button>
+                                        <button class="tool-execution cancel-button" type="button" @click="closeSummary('filter')">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
                                             @click="applyTool('Filter'); changeFilterArrow()">Apply</button>
                                     </div>
