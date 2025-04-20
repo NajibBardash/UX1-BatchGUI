@@ -52,7 +52,7 @@
                 </div>
                 <div class="tools">
                     <details class="tool-panel" v-if="!appliedTools.includes('Crop')">
-                        <summary @click="changeCropArrow">
+                        <summary @click="changeCropArrow" v-tooltip="'This is a tooltip\nwith a line break'">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
                             <img v-else-if="isCropOpen" class="arrow-logo" src="assets/up-arrow-logo.png"
@@ -88,7 +88,7 @@
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
-                                        @click="applyTool('Crop'); changeCropArrow()">Apply</button>
+                                            @click="applyTool('Crop')">Apply</button>
                                     </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                 <div class="execution-buttons">
                                     <button class="tool-execution cancel-button" type="button">Cancel</button>
                                     <button class="tool-execution apply-button" type="button"
-                                        @click="applyTool('Resize'); changeResizeArrow()">Apply</button>
+                                        @click="applyTool('Resize')">Apply</button>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                                             </button>
                                         </div>
                                         <button class="tool-execution apply-button" type="button"
-                                            @click="applyTool('Rotate'); changeRotateArrow()">Apply</button>
+                                            @click="applyTool('Rotate')">Apply</button>
                                     </div>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
-                                            @click="applyTool('Exposure'); changeExposureArrow()">Apply</button>
+                                            @click="applyTool('Exposure')">Apply</button>
                                     </div>
                                 </div>
                             </div>
@@ -327,7 +327,7 @@
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
-                                            @click="applyTool('Color'); changeColorArrow()">Apply</button>
+                                            @click="applyTool('Color')">Apply</button>
                                     </div>
                                 </div>
                             </div>
@@ -372,7 +372,7 @@
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
-                                            @click="applyTool('Frame'); changeFrameArrow()">Apply</button>
+                                            @click="applyTool('Frame')">Apply</button>
                                     </div>
                                 </div>
                             </div>
@@ -404,7 +404,7 @@
                                     <div class="execution-buttons">
                                         <button class="tool-execution cancel-button" type="button">Cancel</button>
                                         <button class="tool-execution apply-button" type="button"
-                                            @click="applyTool('Filter'); changeFilterArrow()">Apply</button>
+                                            @click="applyTool('Filter')">Apply</button>
                                     </div>
                                 </div>
                             </div>
