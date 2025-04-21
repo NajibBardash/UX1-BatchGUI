@@ -726,6 +726,7 @@ h4 {
             padding: 1rem;
             gap: 1rem;
             box-sizing: border-box;
+            place-items: center;
             justify-content: center;
             align-items: center;
 
@@ -993,27 +994,28 @@ h4 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 6rem;
+    grid-column: 1 / -1;
+    justify-self: center;
+    align-self: center;
     gap: 1rem;
-
+    margin-top: 2rem;
+    
     .large-box {
+        width: 100%;
         font-size: 2rem;
         background-color: #1a1a1a;
-
+        
         img {
             border: none;
             width: 900px;
             height: 606px;
         }
-        
+
         img:hover {
             cursor: pointer;
             border: 1px solid white;
         }
     }
-
 
     .box-controls {
         display: flex;
