@@ -51,7 +51,7 @@
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
                 <div class="tools">
-                    <details class="tool-panel" v-if="!appliedTools.includes('Crop')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Crop')" title="Crop-tool">
                         <summary @click="changeCropArrow" id="crop">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Resize')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Resize')" title="Resize-tool">
                         <summary @click="changeResizeArrow" id="resize">
                             <img v-if="!isResizeOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Rotate')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Rotate')" title="Rotate-tool">
                         <summary @click="changeRotateArrow" id="rotate">
                             <img v-if="!isRotateOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -194,7 +194,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Exposure')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Exposure')" title="Exposure-tool">
                         <summary @click="changeExposureArrow" id="exposure">
                             <img v-if="!isExposureOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -274,7 +274,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Color')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Color')" title="Color-tool">
                         <summary @click="changeColorArrow" id="color">
                             <img v-if="!isColorOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -338,7 +338,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Frame')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Frame')" title="Frame-tool">
                         <summary @click="changeFrameArrow" id="frame">
                             <img v-if="!isFrameOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -384,7 +384,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Filter')">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Filter')" title="Filter-tool">
                         <summary @click="changeFilterArrow" id="filter">
                             <img v-if="!isFilterOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -437,16 +437,16 @@
 
                 <div v-else id="in-progress">
                     <div id="first-button-group" class="button-group">
-                        <button type="button" class="top-bar-button" @click="refreshPage">Clear</button>
+                        <button type="button" class="top-bar-button" @click="refreshPage" title="Removes all content and resets the workspace">Clear</button>
                     </div>
                     <div id="second-button-group" class="button-group">
-                        <button type="button" class="top-bar-button" @click="triggerFileInput">Add images</button>
-                        <button type="button" class="top-bar-button" @click="deactivateBox">All images</button>
-                        <button type="button" class="top-bar-button" @click="activateBox(1)">One image</button>
+                        <button type="button" class="top-bar-button" @click="triggerFileInput" title="Upload new images to the grid">Add images</button>
+                        <button type="button" class="top-bar-button" @click="deactivateBox" title="Display all images in grid view">All images</button>
+                        <button type="button" class="top-bar-button" @click="activateBox(1)" title="Show a single image in enlarged view">One image</button>
                     </div>
                     <div id="third-button-group" class="button-group">
-                        <button type="button" class="top-bar-button" @click="exportAs">Export as...</button>
-                        <button type="button" class="top-bar-button">Save</button>
+                        <button type="button" class="top-bar-button" @click="exportAs" title="Export the current image or image grid">Export as...</button>
+                        <button type="button" class="top-bar-button" title="Save your current project to file">Save</button>
                     </div>
                 </div>
 
@@ -512,8 +512,8 @@
                 <div class="modal-workbench">
                     <div class="view-area">
                         <div id="view-header">
-                            <button id="preview" type="button" :class="{ disabled: !preview, active: preview }" @click="setPreviewTrue">Preview</button>
-                            <button id="view-one" type="button" :class="{ disabled: preview, active: !preview }" @click="setPreviewFalse">View 1</button>
+                            <button id="preview" type="button" :class="{ disabled: !preview, active: preview }" @click="setPreviewTrue" title="Show a preview of the current image or layout">Preview</button>
+                            <button id="view-one" type="button" :class="{ disabled: preview, active: !preview }" @click="setPreviewFalse" title="Switch to single-image editing mode">View 1</button>
                         </div>
                         <div id="view-images">
                             <div id="image-row">
