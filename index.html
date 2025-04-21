@@ -490,9 +490,9 @@
                                     <img src="assets/amazonas.jpeg" alt="Amazonas">
                                 </div>
                                 <div class="box-controls">
-                                    <button class="minus" type="button" @click="decreaseImageSize">-</button>
+                                    <button title="Zoom out" class="minus" type="button" @click="decreaseImageSize">-</button>
                                     <span class="percent">{{ imageSize }}%</span>
-                                    <button class="plus" type="button" @click="increaseImageSize">+</button>
+                                    <button title="Zoom in" class="plus" type="button" @click="increaseImageSize">+</button>
                                 </div>
                             </div>
                         </template>
@@ -505,7 +505,7 @@
         <div v-if="showExportModal" class="modal-overlay">
             <div class="modal-window">
                 <div class="modal-header">
-                    <button @click="closeExportModal(); resetExportSize()"><img src="assets/close-logo.png" alt="Close"
+                    <button title="Close this window" @click="closeExportModal(); resetExportSize()"><img src="assets/close-logo.png" alt="Close"
                             class="close-logo"></button>
                     <h3>Export as...</h3>
                 </div>
@@ -522,9 +522,9 @@
                                 </div>
                             </div>
                             <div class="box-controls">
-                                <button class="minus" type="button" @click="decreaseExportSize">-</button>
+                                <button title="Zoom out" class="minus" type="button" @click="decreaseExportSize">-</button>
                                 <span class="percent">{{ exportSize }}%</span>
-                                <button class="plus" type="button" @click="increaseExportSize">+</button>
+                                <button title="Zoom in" class="plus" type="button" @click="increaseExportSize">+</button>
                             </div>
                         </div>
                     </div>
