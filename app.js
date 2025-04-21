@@ -76,9 +76,7 @@ const app = Vue.createApp({
         },
 
         increaseImageSize() {
-            if (this.imageSize < 100) {
-                this.imageSize++;
-            }
+            this.imageSize++;
         },
 
         resetImageSize() {
@@ -93,13 +91,15 @@ const app = Vue.createApp({
         },
 
         increaseExportSize() {
-            if (this.exportSize < 100) {
-                this.exportSize++;
-            }
+            this.exportSize++;
         },
 
         resetExportSize() {
             this.exportSize = Number(100);
+        },
+
+        refreshPage() {
+            window.location.reload();
         },
 
         changeCropArrow() {

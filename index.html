@@ -437,16 +437,16 @@
 
                 <div v-else id="in-progress">
                     <div id="first-button-group" class="button-group">
-                        <button type="button" class="top-bar-button" @click="clear">Clear</button>
+                        <button type="button" class="top-bar-button" @click="refreshPage">Clear</button>
                     </div>
                     <div id="second-button-group" class="button-group">
                         <button type="button" class="top-bar-button" @click="triggerFileInput">Add images</button>
-                        <button type="button" class="top-bar-button" @click="show">All images</button>
-                        <button type="button" class="top-bar-button" @click="selectOne">One image</button>
+                        <button type="button" class="top-bar-button">All images</button>
+                        <button type="button" class="top-bar-button">One image</button>
                     </div>
                     <div id="third-button-group" class="button-group">
                         <button type="button" class="top-bar-button" @click="exportAs">Export as...</button>
-                        <button type="button" class="top-bar-button" @click="save">Save</button>
+                        <button type="button" class="top-bar-button">Save</button>
                     </div>
                 </div>
 
