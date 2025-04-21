@@ -46,12 +46,12 @@
             </div>
 
             <aside id="menu" :class="{ disabled: !hasImage, active: hasImage }">
-                <div id="edit-header" title="Edit you image(s) by picking a tool">
+                <div id="edit-header" title="Edit your image(s) by picking a tool">
                     <p>Edit</p>
                     <img class="info-logo" src="assets/info-logo.png" alt="info-logo">
                 </div>
                 <div class="tools">
-                    <details class="tool-panel" v-if="!appliedTools.includes('Crop')" title="Crop-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Crop')" title="Crop-tool (Ctrl + Shift + C)">
                         <summary @click="changeCropArrow" id="crop">
                             <img v-if="!isCropOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Resize')" title="Resize-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Resize')" title="Resize-tool (Ctrl + Shift + R)">
                         <summary @click="changeResizeArrow" id="resize">
                             <img v-if="!isResizeOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Rotate')" title="Rotate-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Rotate')" title="Rotate-tool (Ctrl + Shift + T)">
                         <summary @click="changeRotateArrow" id="rotate">
                             <img v-if="!isRotateOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -194,7 +194,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Exposure')" title="Exposure-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Exposure')" title="Exposure-tool (Ctrl + Shift + E)">
                         <summary @click="changeExposureArrow" id="exposure">
                             <img v-if="!isExposureOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -274,7 +274,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Color')" title="Color-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Color')" title="Color-tool (Ctrl + Shift + O)">
                         <summary @click="changeColorArrow" id="color">
                             <img v-if="!isColorOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -338,7 +338,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Frame')" title="Frame-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Frame')" title="Frame-tool (Ctrl + Shift + F)">
                         <summary @click="changeFrameArrow" id="frame">
                             <img v-if="!isFrameOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -384,7 +384,7 @@
                             </div>
                         </div>
                     </details>
-                    <details class="tool-panel" v-if="!appliedTools.includes('Filter')" title="Filter-tool">
+                    <details class="tool-panel" v-if="!appliedTools.includes('Filter')" title="Filter-tool (Ctrl + Shift + I)">
                         <summary @click="changeFilterArrow" id="filter">
                             <img v-if="!isFilterOpen" class="arrow-logo" src="assets/down-arrow-logo.png"
                                 alt="down-arrow-logo">
@@ -426,7 +426,7 @@
         <div id="main-bar">
             <div id="top-bar">
                 <div v-if="!hasImage" id="start">
-                    <div title="Click here to add images">
+                    <div title="Click here to add images (Ctrl + Shift + A)">
                         <button type="button" class="top-bar-button" @click="triggerFileInput">
                             Add images
                             <input type="file" ref="fileInput" accept="image/*" @change="onImageSelected"
@@ -455,7 +455,7 @@
             <div id="workbench">
                 <div id="workbench-start" v-if="!hasImage">
                     <div class="add-image-container">
-                        <button id="add-image" title="Click here to add images" @click="triggerFileInput">
+                        <button id="add-image" title="Click here to add images (Ctrl + Shift + A)" @click="triggerFileInput">
                             <img src="assets/add-image-icon.png" alt="Add img logo">
                             <p>Add images</p>
                         </button>
@@ -475,7 +475,7 @@
                             </div>
 
                             <div class="add-image-container">
-                                <button id="add-image" title="Click here to add an image" @click="triggerFileInput">
+                                <button id="add-image" title="Click here to add an image (Ctrl + Shift + A)" @click="triggerFileInput">
                                     <img src="assets/add-image-icon.png" alt="Add img logo">
                                     <p>Add image</p>
                                 </button>
